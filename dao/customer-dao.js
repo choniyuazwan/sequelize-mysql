@@ -25,6 +25,17 @@ function getById(cif, callback){
     )
 }
 
+function insert(data, callback){
+    Customer.create({
+        cif: data.cif,
+        name: data.name
+    }).then(
+        (customer) => {
+            callback(null, customer)
+        }
+    )
+}
+
 function getListPromise(){
     return new Promise((resolve, reject)=>{
         resolve(customers);
@@ -38,16 +49,6 @@ function getByIdPromise(cif){
     });
 }
 
-function insert(data, callback){
-    const index = customers.findIndex((cus) => {
-        return cus.id == data.customerNumber;
-    });
 
-    if (index < 0) {
-        customers.push(data);
-    }
-
-    getById(data.customerNumber, callback);
-}
 
 module.exports = {getList, getById, insert, getListPromise, getByIdPromise};

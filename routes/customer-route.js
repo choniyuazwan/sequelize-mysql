@@ -32,10 +32,8 @@ CustomerRoute.post('/customer', (req, res, next) => {
             resp.notOk(res, error);
         }else if(data){
             resp.ok(res, data);
-        }else{
-            resp.notFound(res, req.param.cif);
         }
     });
-  });
+});
   
 module.exports = CustomerRoute;
