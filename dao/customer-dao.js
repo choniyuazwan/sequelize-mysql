@@ -1,7 +1,11 @@
-const {Customer} = require('../db/sequelize');
-
+const {Customer, Account} = require('../db/sequelize');
 function getList(callback){
-    Customer.findAll().then(
+    Customer.findAll({
+        include: [{
+            model: Account,
+            as: 'accounts',
+        }]
+    }).then(
         (customers)=>{
             callback(null, customers);
         }

@@ -1,10 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const Customer = sequelize.define('customer', {
-        id: {
-            field: 'id',
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
+        cif: {
+            field: 'cif',
+            type: DataTypes.STRING,
+            primaryKey: true
         },
         email: {
             field: 'email',
@@ -31,12 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         cashtag: DataTypes.STRING,
         password: DataTypes.STRING,
         pin: DataTypes.STRING,
-        cif: DataTypes.STRING,
         accountNumber: {
             field: 'account_number',
             type: DataTypes.STRING
         },
-        status: DataTypes.STRING,
+        status: DataTypes.BOOLEAN,
         balance: DataTypes.INTEGER,
         withdrawalLimit: {
             field: 'account_number',

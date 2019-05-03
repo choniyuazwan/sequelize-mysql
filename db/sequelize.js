@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const CustomerModel = require('./model/customer-sequelize');
+const AccountModel = require('./model/account-sequelize');
 
 const sequelize = new Sequelize('infinity', 'root', 'password', {
   host: 'localhost',
@@ -13,6 +14,12 @@ const sequelize = new Sequelize('infinity', 'root', 'password', {
 });
 
 const Customer = CustomerModel(sequelize, Sequelize);
+const Account = AccountModel(sequelize, Sequelize);
+
+Account.belongsTo(Customer, {foreignKey: 'cif'});
+Customer.hasMany(Account, {foreignKey: 'cif'});
+
 module.exports = {
-  Customer
+  Customer,
+  Account
 };
