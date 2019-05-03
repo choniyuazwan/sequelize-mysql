@@ -1,0 +1,40 @@
+const {Customer} = require('../db/sequelize');
+
+function getList(callback){
+    Customer.findAll().then(
+        (customers)=>{
+            callback(null, customers);
+        }
+    )
+}
+
+function getById(cif, callback){
+    callback(null, findCust);
+}
+
+function getListPromise(){
+    return new Promise((resolve, reject)=>{
+        resolve(customers);
+    });
+}
+
+function getByIdPromise(cif){
+    console.log(cif);
+    return new Promise((resolve, reject)=>{
+        resolve(customers.find(cus => {return cus.customerNumber == cif;}));
+    });
+}
+
+function insert(data, callback){
+    const index = customers.findIndex((cus) => {
+        return cus.id == data.customerNumber;
+    });
+
+    if (index < 0) {
+        customers.push(data);
+    }
+
+    getById(data.customerNumber, callback);
+}
+
+module.exports = {getList, getById, insert, getListPromise, getByIdPromise};
