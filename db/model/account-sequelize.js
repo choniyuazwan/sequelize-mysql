@@ -5,11 +5,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             primaryKey: true
         },
+        accountName: {
+            field: 'account_name',
+            type: DataTypes.STRING
+        },
         balance: {
             field: 'balance',
             type: DataTypes.INTEGER
         },
-        status: DataTypes.BOOLEAN,
+        status: DataTypes.STRING,
         shoppingLimit: {
             field: 'shopping_limit',
             type: DataTypes.INTEGER

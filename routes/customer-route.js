@@ -27,11 +27,35 @@ CustomerRoute.get('/customer/:cif', (req, res)=>{
 })
 
 CustomerRoute.post('/customer', (req, res, next) => {
-    customerDao.insert(req.body, function(error, data){
+    customerDao.insert(req.body, function(error, result){
         if(error){
             resp.notOk(res, error);
-        }else if(data){
-            resp.ok(res, data);
+        }else{
+            resp.ok(res, result);
+        }
+    });
+});
+
+CustomerRoute.put('/customer/:cif', (req, res, next) => {
+    customerDao.update(req.params.cif, req.body, function(error, result){
+        if(error){
+            resp.notOk(res, error);
+        }else if(result){
+            resp.ok(res, result);
+        }else{
+            resp.notFound(res, req.params.cif);
+        }
+    });
+});
+
+CustomerRoute.delete('/customer/:cif', (req, res, next) => {
+    customerDao.remove(req.params.cif, function(error, result){
+        if(error){
+            resp.notOk(res, error);
+        }else if(result){
+            resp.ok(res, result);
+        }else{
+            resp.notFound(res, req.params.cif);
         }
     });
 });

@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'account_number',
             type: DataTypes.STRING
         },
-        status: DataTypes.BOOLEAN,
+        status: DataTypes.STRING,
         balance: DataTypes.INTEGER,
         withdrawalLimit: {
             field: 'account_number',

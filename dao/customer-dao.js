@@ -12,8 +12,8 @@ function getList(callback){
     )
 }
 
-function getById(cif, callback){
-    Customer.findByPk(cif, {
+function getById(id, callback){
+    Customer.findByPk(id, {
         include: [{
             model: Account,
             as: 'accounts',
@@ -36,19 +36,27 @@ function insert(data, callback){
     )
 }
 
-function getListPromise(){
-    return new Promise((resolve, reject)=>{
-        resolve(customers);
-    });
+function update(id, data, callback){
+    Customer.update({
+        name: data.name,
+        address: data.address
+    }, {
+        where: {cif: id}
+    }).then(
+        (customer) => {
+            callback(null, customer)
+        }
+    )
 }
 
-function getByIdPromise(cif){
-    console.log(cif);
-    return new Promise((resolve, reject)=>{
-        resolve(customers.find(cus => {return cus.customerNumber == cif;}));
-    });
+function remove(id, callback){
+    Customer.destroy({
+        where: {cif: id}
+    }).then(
+        (customer) => {
+            callback(null, customer);
+        }
+    )
 }
 
-
-
-module.exports = {getList, getById, insert, getListPromise, getByIdPromise};
+module.exports = {getList, getById, insert, update, remove};
