@@ -15,18 +15,15 @@ CustomerRoute.get('/customers', (req, res)=>{
 })
 
 CustomerRoute.get('/customer/:cif', (req, res)=>{
-    customerDao.getByIdPromise(req.params['cif']).then(
-        function(data){
-            if(data){
-                resp.ok(res, data);
-            }else{
-                resp.notFound(res, req.param.cif);
-            }
-        },
-        function(error){
+    customerDao.getById(req.params['cif'], function(error, result){
+        if(error){
             resp.notOk(res, error);
+        }else if(result){
+            resp.ok(res, result);
+        }else{
+            resp.notFound(res, req.params.cif);
         }
-    );
+    });
 })
 
 CustomerRoute.post('/customer', (req, res, next) => {

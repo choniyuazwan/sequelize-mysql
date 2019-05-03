@@ -13,7 +13,16 @@ function getList(callback){
 }
 
 function getById(cif, callback){
-    callback(null, findCust);
+    Customer.findByPk(cif, {
+        include: [{
+            model: Account,
+            as: 'accounts',
+        }]
+    }).then(
+        (customer) => {
+            callback(null, customer);
+        }
+    )
 }
 
 function getListPromise(){
